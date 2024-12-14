@@ -1,0 +1,33 @@
+# Ignore system files and folders
+.DS_Store
+Thumbs.db
+
+# Ignore logs and temporary files
+*.log
+temp/
+tmp/
+
+# Ignore cache folders
+cache/
+*.cache
+
+# Ignore sensitive configuration files
+.env
+*.env
+
+# Ignore dependencies and libraries (if using Composer)
+vendor/
+
+# Ignore SQLite database files
+*.sqlite
+*.sqlite3
+
+# Ignore uploads directory
+uploads/
+
+# Ignore IDE files (e.g., VSCode)
+.vscode/
+.idea/
+
+# Ignore configuration and build files
+config.php
