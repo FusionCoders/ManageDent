@@ -254,7 +254,7 @@ INSERT INTO Dentist_Specialty (specialty_id, dentist_id) VALUES (3, 5);
 
 
 -------------------------Patient
-INSERT INTO Paciente (id, person_name, tax_id, birth_date, phone_number, email) 
+INSERT INTO Patient (id, person_name, tax_id, birth_date, phone_number, email) 
 VALUES 
  (1, 'Leonor Pereira', 222222221, '2001-07-10', '919310310', 'leonorp@gmail.com'),
  (2, 'Francisco Santos', 222222222, '2001-07-10', '919311311', 'kikosantos@gmail.com'),
@@ -359,7 +359,7 @@ VALUES
  (150, 5, '17:00', '18:00');
 
 
-INSERT INTO Appointment (id, date_appointment, medico_id, patient_id, assistant_id, schedule_id)
+INSERT INTO Appointment (id, date_appointment, dentist_id, patient_id, assistant_id, schedule_id)
 VALUES
   (1, '2023-06-12', 1, 1, 4, 101),
   (2, '2023-06-12', 1, 2, 2, 102),
@@ -434,7 +434,7 @@ VALUES
 (13, 'Daily use of dental floss is recommended for oral hygiene.', 13, 2),
 (14, 'A dental occlusion evaluation is important.', 14, 9),
 (15, 'The patient should avoid foods and drinks high in sugar.', 15, 4),
-(16, "Teeth whitening is needed to improve the patient's dental aesthetics.", 16, 7),
+(16, 'Teeth whitening is needed to improve the patient dental aesthetics.', 16, 7),
 (17, 'Sealant application on the back teeth is recommended to prevent cavities.', 17, 5),
 (18, 'Tartar removal is required for the patient.', 18, 2),
 (19, 'Evaluation of possible impacted wisdom teeth is recommended.', 19, 1),
