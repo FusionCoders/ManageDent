@@ -21,7 +21,7 @@ function authenticateUser($email, $password){
                 header("Location:../html/menuDenAss.php");
             }else{
                 $message = 'deleted';
-                header("Location: ../html/login.php?mensagem=".urlencode($message));
+                header("Location: ../html/login.php?message=".urlencode($message));
             }
         } 
         exit();
@@ -31,13 +31,13 @@ function authenticateUser($email, $password){
             createSession("assistant", $email);
         }else{
             $message = 'deleted';
-            header("Location: ../html/login.php?mensagem=".urlencode($message));
+            header("Location: ../html/login.php?message=".urlencode($message));
             exit();
         }
         exit();
     } else {
         $message = 'show';
-        header("Location: ../html/login.php?mensagem=".urlencode($message));
+        header("Location: ../html/login.php?message=".urlencode($message));
         exit();
     }
 }
