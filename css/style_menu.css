@@ -1,0 +1,133 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  background: url('../img/background.png') no-repeat;
+  background-size: cover;
+  background-position: center;
+  backdrop-filter: blur(20px);
+  overflow-x: hidden;
+}
+
+.sidebar {
+  width: 220px;
+  height: 100vh;
+  background-color: #162938;
+  padding-top: 20px;
+  z-index: 1;
+  overflow-y: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.main-section {
+  margin-left: 220px;
+  width: calc(100% - 220px);
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+  
+.sidebar h2{
+  font-size: 1.5em;
+  color: white;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.sidebar h1{
+  color: white;
+  text-align: center;
+  font-size: 0.9em;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.sidebar nav{
+  font-size: 1em;
+  padding-top: 6px;
+  border-top: 2px solid white; /* Adiciona uma linha horizontal com 1 pixel de espessura e cor preta */
+  margin: 10px;
+  margin-top: 12px;
+  text-align: center;
+}
+
+/* The navigation menu links */
+.sidebar .nav_menu a {
+  padding: 8px 8px 8px 8px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  font-size: 1em;
+}
+
+.sidebar .nav_menu .logOut {
+  padding-top: calc(100% - 100px);
+}
+
+.sidebar .profile_pick{
+  width: 100%; /* Defina a largura desejada */
+  height: 150px; /* Defina a altura desejada */
+  overflow: hidden; /* Oculta qualquer parte da imagem que ultrapasse as dimensões do container */
+  padding: 10px;
+  justify-content: center;
+  display: flex;
+}
+
+.profile_pick img {
+  width: 130px; /* A imagem ocupa 100% do espaço disponível dentro do container */
+  height: auto; /* A altura é calculada automaticamente para manter a proporção original da imagem */
+  display: block; /* Remove qualquer espaço extra abaixo da imagem */
+  border-radius: 50%; /* Define um raio de borda de 50% para criar uma forma de círculo */
+  border: 1px solid white; /* Define a borda com 1 pixel de largura e cor branca */
+}
+
+
+/* When you mouse over the navigation links, change their color */
+.sidebar a:hover {
+  color: white;
+}
+
+.sidebar .div_bottom{
+  position: absolute; /* Posiciona o div no modo absoluto */
+  bottom: 0; /* Define o posicionamento no fundo do aside */
+  display: flex; /* Ativa o flexbox para alinhar os elementos horizontalmente */
+  align-items: center; /* Alinha os elementos verticalmente ao centro */
+  justify-content: space-between; /* Distribui o espaço entre os elementos */
+  width: 100%; /* Define a largura do div_bottom como 100% */
+  padding: 10px; /* Adiciona um espaçamento interno */
+}
+
+.sidebar .div_bottom .text {
+  margin-right: auto; /* Empurra o elemento para a esquerda, posicionando-o à esquerda do logo */
+}
+
+.sidebar .div_bottom .text h4 {
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  font-size: 0.6em;
+}
+
+.sidebar .div_bottom .log_out a:hover {
+  color: white;
+}
+
+.sidebar .div_bottom .logo {
+  margin-left: auto; /* Empurra o elemento para a direita, posicionando-o à direita do log out */
+}
+
+.sidebar .div_bottom .logo img {
+  height: 30px; /* Ajusta a altura da imagem do logo conforme necessário */
+}
+
+
+  
+  

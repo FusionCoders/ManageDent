@@ -1,0 +1,14 @@
+.main-section{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-section h1{
+    text-align: center;
+    font-family: 'Secular One', sans-serif;
+    font-size: 34px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    color: #162938;
+}
