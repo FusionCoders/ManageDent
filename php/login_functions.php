@@ -11,7 +11,7 @@ function authenticateUser($email, $password){
     $storedPasswordHashDentist = recoverHashPasswordDentist($email);
     $storedPasswordHashAssistant = recoverHashPasswordAssistant($email);
     // Validação password
-    if (password_verify($password, $storedPasswordHashMedico)) {
+    if (password_verify($password, $storedPasswordHashDentist)) {
         if ($email == 'diogobastos@gmail.com'){
             createSession("admin", $email);
             header("Location:../html/menuAdm.php");
@@ -25,7 +25,7 @@ function authenticateUser($email, $password){
             }
         } 
         exit();
-    } else if (password_verify($password, $storedPasswordHashAssistente)){
+    } else if (password_verify($password, $storedPasswordHashAssistant)){
         if(assistantValid($email)){
             header("Location:../html/menuDenAss.php");
             createSession("assistant", $email);
