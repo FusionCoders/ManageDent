@@ -1,0 +1,183 @@
+.main-section {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 50px;
+}
+    
+.main-section h1 {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.main-section h2 {
+    padding-top: 20px;
+    padding-left: 40px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.main-section .inf{
+    padding-left: 40px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+  
+.input-box {
+    position: relative;
+    width: 50%;
+    height: 50px;
+    margin: 30px 0;
+  
+}
+  
+.input-box .inside-box{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;  
+}
+
+.input-box .inside-box .check-box{
+    display: flex;
+    position: relative;
+    left: 5px;
+    align-items: center;
+    height: 100%;
+}
+
+.input-box .inside-box .name{
+    padding-left: 15px;
+}
+
+.input-box:nth-child(-n+9){
+    border-bottom: 2px solid #162938;
+}
+
+.input-box:nth-child(3){
+    margin-bottom: 20px;
+}
+
+#office{
+    padding-top: 15px;
+    padding-right: 50px;
+    padding-bottom: 15px;
+}
+
+.input-box label {
+    position: absolute;
+    top: 0%;
+    left: 5px;
+    transform: translateY(-50%);
+    font-size: 1em;
+    color: #162938;
+    font-weight: 500;
+    pointer-events: none;
+    transition: .5s;
+}
+
+.input-box input {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 1em;
+  color: #162938;
+  font-weight: 600;
+  padding: 0 35px 0 5px;
+}
+
+.input-box .icon {
+  position: absolute;
+  right: 8px;
+  font-size: 1.2em;
+  color: #162938;
+  line-height: 57px;
+}
+
+.btn {
+  position: absolute;
+  right: 5%;
+  bottom: 46px;
+  display: inline-flex;
+  padding: 10px;
+  background: #162938;
+  border: none;
+  outline: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1em;
+  color: #fff;
+  font-weight: 500;
+  width: 200px;
+  justify-content: center;
+}
+
+#btn_delete{
+  bottom: 146px;
+}
+
+#btn_cancel{
+  bottom: 96px;
+}
+
+#schedule-box{
+    height: auto;
+}
+
+#schedule-box .hours{
+    position: relative;
+    width: 60%;
+    margin-top: 10px;
+    margin-right: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+#schedule-box .hours input{
+    padding-right: 0px;
+}
+
+#photoDiv{
+    padding: 10px 35px 0 0px;
+}
+
+#photoDiv input{
+    padding-left: 0px;
+}
+
+#schedule-box .label{
+    position: relative;
+    display: flex; /* Adicione esta linha */
+    align-items: center; /* Adicione esta linha */
+}
+
+#schedule-box .name{
+    padding-bottom: 20px;
+}
+#schedule-box .days {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 10px;
+}
+  
+#schedule-box .input{
+    display: flex;
+    flex-direction: row;
+}
+
+#schedule-box .days label{
+    all: initial;
+    min-width: 90px;
+    padding-left: 5px;
+    font-size: 0.8em;
+    color: #162938;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+    align-items: center;
+    display: flex;
+}
+
+.warning{
+    font-size: .9em;
+    color: red;
+  }

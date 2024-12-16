@@ -1,0 +1,80 @@
+.main-section {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 50px;
+}
+    
+.main-section h1 {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.main-section h2 {
+    padding-top: 20px;
+    padding-left: 40px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+.main-section section{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.single-Den{
+    height: 250px;
+    width: auto;
+    text-align: center;
+    border-radius: 7px;
+    margin-bottom: 20px;
+    color: #fff;
+    position: relative;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.single-Den img{
+    width: 250px;
+    height: 250px;
+    border-radius: 7px;
+}
+
+.overlay{
+    width: 250px;
+    height: 250px;
+    position: absolute;
+    top: 0;
+    border-radius: 7px;
+    background: linear-gradient(rgba(0,0,0,0.5), #162938);
+    opacity: 0;
+    transition: 1s; 
+}
+
+.single-Den:hover .overlay{
+    opacity: 1;
+}
+
+.denName{
+    width: 100%;
+    position: absolute;
+    bottom: 0%;
+    transform: translateX(-50);
+    padding: 25px;
+    opacity: 0;
+    transition: 1s;
+}
+
+.denName h3 {
+    font-size: 24px;
+    color: white;
+}
+
+.denName h4 {
+    font-size: 14px;
+    color: wheat;
+}
+
+.single-Den:hover .denName{
+    bottom: 15%;
+    opacity: 1;
+}
