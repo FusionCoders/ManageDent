@@ -1,0 +1,3 @@
+.input-box:nth-child(n+9){
+    border-bottom: none;
+}
