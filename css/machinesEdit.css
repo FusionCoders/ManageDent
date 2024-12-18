@@ -1,0 +1,161 @@
+.main-section {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 50px;
+}
+  
+.main-section h1 {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.main-section h2 {
+  padding-top: 20px;
+  padding-left: 40px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.main-section .inf-machines{
+  padding-left: 40px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.input-box {
+  position: relative;
+  width: 50%;
+  height: 50px;
+  margin: 30px 0;
+}
+
+.input-box:nth-child(-n+3){
+  border-bottom: 2px solid #162938;
+}
+.input-box:nth-child(3){
+  margin-bottom: 20px;
+}
+
+.input-box label {
+  position: absolute;
+  top: 0%;
+  left: 5px;
+  transform: translateY(-50%);
+  font-size: 1em;
+  color: #162938;
+  font-weight: 500;
+  pointer-events: none;
+  transition: .5s;
+}
+
+.input-box input {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 1em;
+  color: #162938;
+  font-weight: 600;
+  padding: 0 35px 0 5px;
+}
+
+.input-box .icon {
+  position: absolute;
+  right: 8px;
+  font-size: 1.2em;
+  color: #162938;
+  line-height: 57px;
+}
+
+.btn {
+  position: absolute;
+  right: 5%;
+  bottom: 46px;
+  display: inline-flex;
+  padding: 10px;
+  background: #162938;
+  border: none;
+  outline: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1em;
+  color: #fff;
+  font-weight: 500;
+  width: 200px;
+  justify-content: center;
+}
+
+#btn_delete{
+  bottom: 146px;
+}
+
+#btn_cancel{
+  bottom: 96px;
+}
+
+#brandDiv{
+  position: relative;
+  justify-content: space-between;
+  display: flex;
+}
+
+.select{
+  position: absolute;
+  display: inline-flex;
+  padding: 10px;
+  background: #162938;
+  border: none;
+  outline: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1em;
+  color: #fff;
+  font-weight: 500;
+  align-items: center;
+  width: 45%;
+}
+
+.add-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 50%;
+  height: 30px;
+  padding-top: 10px;
+}
+
+#newBrandInput {
+  position: absolute;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 1em;
+  color: #162938;
+  font-weight: 600;
+}
+
+.input-box .photo{
+  padding-top: 10px;
+}
+
+#photoDiv input{
+  padding-left: 0;
+}
+
+.warning_brand{
+  font-size: .9em;
+  color: red;
+  font-weight: 500;
+  margin-top: 9px;
+}
+.warning{
+  font-size: .9em;
+  color: red;
+}
+
+.label_brand{
+  padding-left: 5px;
+}
