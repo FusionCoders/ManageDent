@@ -40,7 +40,7 @@ include_once("../html/sidebar.php");
                 }
                 $message = 'add';
                 echo '<div class="single-Ass">
-                        <img src="' . '../img/Add.png' . '" alt="Ass">
+                        <img src="' . '../img/add.png' . '" alt="Ass">
                         <a href="assistantsEdit.php?message=' . urlencode($message) . '">
                             <div class="overlay"></div>
                             <div class="assName">

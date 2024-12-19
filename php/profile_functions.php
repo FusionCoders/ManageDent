@@ -20,7 +20,13 @@ if (isset($_POST['change_personal_area'])) {
             exit();
         } else {
             editPersonalArea($email, $person_name, $birth_date, $tax_id, $phone_number);
-            header("Location:../html/menu.php"); # NAO EXISTE, VERIFICAR
+            session_start();
+            $role = $_SESSION['role'];
+            if ($role == "admin"){
+                header("Location:../html/menuAdm.php");
+            }else{
+                header("Location:../html/menuDenAss.php");
+            }
             exit();
         }
     } catch(PDOException $e) {

@@ -63,7 +63,7 @@ include_once("../php/db_functions.php");
                     $role = $_SESSION['role'];
 
                     $dentistSchedule = getDentistSchedule($currentDate, $role);
-                    $appointment = getAppointmentsDentist($currentDate, $role);
+                    $appointments = getAppointmentsDentist($currentDate, $role);
                     
                     echo '<div class="day-square">';
                     

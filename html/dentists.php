@@ -40,7 +40,7 @@ include_once("../html/sidebar.php");
                 }
                 $message = 'add';
                 echo '<div class="single-Den">
-                        <img src="' . '../img/Add.png' . '" alt="Den">
+                        <img src="' . '../img/add.png' . '" alt="Den">
                         <a href="dentistsEdit.php?message=' . urlencode($message) . '">
                             <div class="overlay"></div>
                             <div class="denName">

@@ -42,15 +42,20 @@ include_once("../php/db_functions.php");
                 }else{
                     $date_appointment = date('Y-m-d');
                 }
-                $appointments = getAppointments($date_appointment);
+                $role = $_SESSION['role'];
+                $appointments = getAppointments($date_appointment, $role);
                 echo '<h4>My appointments:</h4>';
                 if (empty($appointments)) {
                     echo '<p>There are no appointments scheduled.</p>';
                 } else {
                     foreach ($appointments as $appointment) {
                         $patient_name = getPatientName($appointment['patient_id']);
-                        $assistant_name = getAssistantName($appointment['assistant_id']);
-                        $id_appointment = $appointment['schedule_id'];
+                        if ($role == "dentist"){
+                            $professional_name = getAssistantName($appointment['assistant_id']);
+                        } elseif ($role == "assistant"){
+                            $professional_name = getDentistName($appointment['dentist_id']);
+                        }
+                        $id_appointment = $appointment['appointment_id'];
                         $hours_appointment = getHoursAppointment($id_appointment);
                         $start_time = $hours_appointment['start_time'];
                         $end_time = $hours_appointment['end_time'];
@@ -95,35 +100,54 @@ include_once("../php/db_functions.php");
                         echo '</div>';
 
                         echo '<div class="input-box">';
-                        echo '<label>Assistant:</label>';
-                        if (($date_appointment==date('Y-m-d') && $start_time>=date('H:i:s')) || $date_appointment>date('Y-m-d')) {
-                            echo '<span class="icon"><ion-icon name="create-outline"></ion-icon></span>';
-                            echo '<select name="assistant_id">';
-                            $all_assistants = getAllAssistants();
-                            echo '<option value="' . $appointment['assistant_id'] . '">' . $assistant_name . '</option>';
-                            foreach ($all_assistants as $assistant) {
-                                if($appointment['assistant_id'] != $assistant['id']){
-                                    echo '<option value="' . $assistant['id'] . '">' . $assistant['person_name'] . '</option>';
+                        if ($role == "dentist"){
+                            echo '<label>Assistant:</label>';
+                            if (($date_appointment==date('Y-m-d') && $start_time>=date('H:i:s')) || $date_appointment>date('Y-m-d')) {
+                                echo '<span class="icon"><ion-icon name="create-outline"></ion-icon></span>';
+                                echo '<select name="assistant_id">';
+                                $all_assistants = getAllAssistants();
+                                echo '<option value="' . $appointment['assistant_id'] . '">' . $professional_name . '</option>';
+                                foreach ($all_assistants as $assistant) {
+                                    if($appointment['assistant_id'] != $assistant['id']){
+                                        echo '<option value="' . $assistant['id'] . '">' . $assistant['person_name'] . '</option>';
+                                    }
                                 }
+                                echo '</select>';
+                            } else {
+                                echo '<select name="assistant_id" readonly>';
+                                echo '<option value="' . $appointment['assistant_id'] . '">' . $professional_name . '</option>';
+                                echo '</select>';
                             }
-                            echo '</select>';
-                        } else {
-                            echo '<select name="assistant_id" readonly>';
-                            echo '<option value="' . $appointment['assistant_id'] . '">' . $assistant_name . '</option>';
-                            echo '</select>';
+                        } elseif ($role == "assistant"){
+                            echo '<label>Dentist:</label>';
+                            if (($date_appointment==date('Y-m-d') && $start_time>=date('H:i:s')) || $date_appointment>date('Y-m-d')) {
+                                echo '<span class="icon"><ion-icon name="create-outline"></ion-icon></span>';
+                                echo '<select name="assistant_id">';
+                                $all_dentists = getAllDentists();
+                                echo '<option value="' . $appointment['dentist_id'] . '">' . $professional_name . '</option>';
+                                foreach ($all_dentists as $dentist) {
+                                    if($appointment['dentist_id'] != $dentist['id']){
+                                        echo '<option value="' . $dentist['id'] . '">' . $dentist['person_name'] . '</option>';
+                                    }
+                                }
+                                echo '</select>';
+                            } else {
+                                echo '<select name="assistant_id" readonly>';
+                                echo '<option value="' . $appointment['dentist_id'] . '">' . $professional_name . '</option>';
+                                echo '</select>';
+                            }
                         }
-                    
                         echo '</div>';
                         echo '<p class="warning">';
                             if (isset($_GET['message'])) {
                                 $message = urldecode($_GET['message']);
                                 $appointment_id = urldecode($_GET['appointment_id']);
-                                if ($message=='assistant unavailable' && $id_appointment==$appointment_id) {
-                                    echo 'The assistant already has an appointment at that time.';
+                                if ($message=='professional unavailable' && $id_appointment==$appointment_id) {
+                                    echo 'The professional already has an appointment at that time.';
                                 } 
                             }
                         echo '</p>';
-
+                        
                         if (($date_appointment==date('Y-m-d') && $start_time>=date('H:i:s')) || $date_appointment>date('Y-m-d')) {
                             echo '<button type="submit" class="btn" name="delete" id="btn_delete">Delete</button>';
                             echo '<button type="submit" class="btn" name="edit" id="btn_save">Save Changes</button>';
@@ -144,7 +168,7 @@ include_once("../php/db_functions.php");
                         $patient_name = getPatientName($appointment['patient_id']);
                         $assistant_name = getAssistantName($appointment['assistant_id']);
                         $dentist_name = getDentistName($appointment['dentist_id']);
-                        $id_appointment = $appointment['schedule_id'];
+                        $id_appointment = $appointment['appointment_id'];
                         $hours_appointment = getHoursAppointment($id_appointment);
                         $start_time = $hours_appointment['start_time'];
                         $end_time = $hours_appointment['end_time'];

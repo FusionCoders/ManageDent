@@ -538,39 +538,68 @@ function getAppointment($appointment_id) {
 
 }
 
-function getAppointments($date_appointment) {
+function getAppointments($date_appointment, $role) {
     global $db;
-    $dentist_id = $_SESSION['id'];
-    $stmt = $db -> prepare('SELECT C.id AS id, 
-                        C.patient_id AS patient_id, 
-                        C.assistant_id AS assistant_id, 
-                        C.schedule_id as schedule_id
-                         FROM Appointment AS C 
-                         JOIN Schedule AS H ON C.schedule_id=H.id
-                         WHERE dentist_id = ? AND date_appointment = ? ORDER BY start_time');
-    $stmt -> execute(array($dentist_id, $date_appointment));
+    $professional_id = $_SESSION['id'];
+    if ($role == "dentist"){
+        $stmt = $db -> prepare('SELECT C.id AS id, 
+                            C.patient_id AS patient_id, 
+                            C.assistant_id AS assistant_id, 
+                            C.schedule_id as schedule_id
+                                FROM Appointment AS C 
+                                JOIN Schedule AS H ON C.schedule_id=H.id
+                                WHERE dentist_id = ? AND date_appointment = ? ORDER BY start_time');
+    } else if ($role == "assistant"){
+        $stmt = $db -> prepare('SELECT C.id AS id, 
+                            C.patient_id AS patient_id, 
+                            C.dentist_id AS dentist_id, 
+                            C.schedule_id as schedule_id
+                                FROM Appointment AS C 
+                                JOIN Schedule AS H ON C.schedule_id=H.id
+                                WHERE assistant_id = ? AND date_appointment = ? ORDER BY start_time');
+    }
+    $stmt -> execute(array($professional_id, $date_appointment));
     
     $appointments = array();
-    while ($row = $stmt->fetch()) {
-        $appointment = array(
-            'appointment_id' => $row['id'],
-            'patient_id' => $row['patient_id'],
-            'assistant_id' => $row['assistant_id'],
-            'schedule_id' => $row['schedule_id']
-        );
-        $appointments[] = $appointment;
+    if ($role == "dentist"){
+        while ($row = $stmt->fetch()) {
+            $appointment = array(
+                'appointment_id' => $row['id'],
+                'patient_id' => $row['patient_id'],
+                'assistant_id' => $row['assistant_id'],
+                'schedule_id' => $row['schedule_id']
+            );
+            $appointments[] = $appointment;
+        }
+    } else if ($role == "assistant"){
+        while ($row = $stmt->fetch()) {
+            $appointment = array(
+                'appointment_id' => $row['id'],
+                'patient_id' => $row['patient_id'],
+                'dentist_id' => $row['dentist_id'],
+                'schedule_id' => $row['schedule_id']
+            );
+            $appointments[] = $appointment;
+        }
     }
     return $appointments;
 }
 
 function getAllAppointments($date_appointment) {
     global $db;
-    $dentist_id = $_SESSION['id'];
-    $stmt = $db -> prepare('SELECT *
+    session_start();
+    $professional_id = $_SESSION['id'];
+    $role = $_SESSION['role'];
+    if ($role == "dentist"){
+        $stmt = $db -> prepare('SELECT *
+                            FROM Appointment
+                            WHERE dentist_id != ? AND date_appointment = ?');
+    } elseif ($role == "assistant"){
+        $stmt = $db -> prepare('SELECT *
                          FROM Appointment
-                         WHERE dentist_id != ? AND date_appointment = ?');
-    $stmt -> execute(array($dentist_id, $date_appointment));
-    
+                         WHERE assistant_id != ? AND date_appointment = ?');
+    }
+    $stmt -> execute(array($professional_id, $date_appointment));
     $all_appointments = array();
     while ($row = $stmt->fetch()) {
         $appointment = array(
@@ -592,7 +621,7 @@ function getAllAssistants() {
 
     $all_assistants = array();
     while ($row = $stmt->fetch()) {
-        $assistente = array(
+        $assistant = array(
             'person_name' => $row['person_name'],
             'id' => $row['id']
         );
@@ -617,13 +646,20 @@ function getAllDentists() {
     return $all_dentists;
 }
 
-function editAppointment($date_appointment, $appointment_id, $patient_id, $assistant_id, $start_time, $end_time) {
+function editAppointment($date_appointment, $appointment_id, $patient_id, $professional_id, $start_time, $end_time) {
     global $db;
+    session_start();
+    $role = $_SESSION['role'];
     $day_week = date('N', strtotime($date_appointment));
     $schedule_id = checkScheduleExistence($day_week, $start_time, $end_time);
-    $stmt = $db -> prepare('UPDATE Appointment SET patient_id=?, assistant_id=?, schedule_id=? 
-                                WHERE id=?');
-    $stmt -> execute(array($patient_id, $assistant_id, $schedule_id, $appointment_id));
+    if ($role == "dentist"){
+        $stmt = $db -> prepare('UPDATE Appointment SET patient_id=?, assistant_id=?, schedule_id=? 
+                                    WHERE id=?');
+    } elseif ($role == "assistant"){
+        $stmt = $db -> prepare('UPDATE Appointment SET patient_id=?, dentist_id=?, schedule_id=? 
+                                    WHERE id=?');
+    }
+    $stmt -> execute(array($patient_id, $professional_id, $schedule_id, $appointment_id));
 }
 
 function checkScheduleExistence($day_week, $start_time, $end_time) {
@@ -639,6 +675,17 @@ function checkScheduleExistence($day_week, $start_time, $end_time) {
         $stmt -> execute(array($day_week, $start_time, $end_time));
         return $db->lastInsertId();
     };
+}
+
+function availabilityProfessional($date_appointment, $professional_id, $start_time, $end_time, $appointment_id){
+    session_start();
+    $role = $_SESSION['role'];
+    if ($role == "dentist"){
+        $var = availabilityAssistant($date_appointment, $professional_id, $start_time, $end_time, $appointment_id);
+    } elseif ($role == "assistant"){
+        $var = availabilityDentist($date_appointment, $professional_id, $start_time, $end_time, $appointment_id);
+    }
+    return $var;
 }
 
 function availabilityAssistant($date_appointment, $assistant_id, $start_time, $end_time, $appointment_id) {
@@ -984,15 +1031,15 @@ function getAppointmentsDentist($date_appointment, $role) {
         $stmt = $db -> prepare('SELECT start_time, end_time
                             FROM Schedule JOIN Appointment
                             ON Appointment.schedule_id = Schedule.id
-                            WHERE assistant_id = ? AND date_appointment = ?'); #CHANGED IT WAS "WHERE DENTIST_ID = ?"
+                            WHERE assistant_id = ? AND date_appointment = ?');
     }
     
     $stmt -> execute(array($dentist_id, $date_appointment));
     $appointments = array();
     while ($row = $stmt->fetch()) {
         $appointment = array(
-            'hora_inicio' => $row['hora_inicio'],
-            'hora_fim' => $row['hora_fim']
+            'start_time' => $row['start_time'],
+            'end_time' => $row['end_time']
         );
         $appointments[] = $appointment;
     }

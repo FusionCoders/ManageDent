@@ -40,7 +40,7 @@ include_once("../html/sidebar.php");
                 }
                 $message = 'add';
                 echo '<div class="single-Mac">
-                        <img src="' . '../img/Add.png' . '" alt="Mac">
+                        <img src="' . '../img/add.png' . '" alt="Mac">
                         <a href="machinesEdit.php?message=' . urlencode($message) . '">
                             <div class="overlay"></div>
                             <div class="macName">

@@ -12,19 +12,19 @@ if (isset($_POST['show_appointments'])) {
     $appointment_id = $_GET['appointment_id'];
     $date_appointment = $_GET['date_appointment'];
     $patient_id = $_POST['patient_id'];
-    $assistant_id = $_POST['assistant_id'];
+    $professional_id = $_POST['assistant_id'];
     $start_time = $_POST['start_time'];
     $end_time = $_POST['end_time'];
 
     try {
         if($start_time<$end_time) {
-            $var = availabilityAssistant($date_appointment, $assistant_id, $start_time, $end_time, $appointment_id);
+            $var = availabilityProfessional($date_appointment, $professional_id, $start_time, $end_time, $appointment_id);
             if ($var==0) {
-                editAppointment($date_appointment, $appointment_id, $patient_id, $assistant_id, $start_time, $end_time);
+                editAppointment($date_appointment, $appointment_id, $patient_id, $professional_id, $start_time, $end_time);
                 header("Location:../html/appointmentsMenu.php");
                 exit();
             } else {
-                $message = 'assistant unavailable';
+                $message = 'professional unavailable';
                 header("Location: ../html/appointments.php?message=".urlencode($message)."&date_appointment=".urlencode($date_appointment)."&appointment_id=".urlencode($appointment_id));
                 exit();
             }
