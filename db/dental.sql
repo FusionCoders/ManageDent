@@ -153,49 +153,49 @@ INSERT INTO Schedule (id, week_day, start_time, end_time) VALUES (2, 2, '09:00',
 INSERT INTO Schedule (id, week_day, start_time, end_time) VALUES (3, 3, '08:00', '18:00');
 INSERT INTO Schedule (id, week_day, start_time, end_time) VALUES (4, 4, '08:00', '19:00');
 INSERT INTO Schedule (id, week_day, start_time, end_time) VALUES (5, 5, '08:00', '18:00');
-INSERT INTO Dentist (id, person_name, tax_id, birth_date, phone_number, email, salary, office, dentist_password, photo, active_dentist, schedule1_id, schedule2_id, schedule3_id, schedule4_id, schedule5_id) VALUES  (1, 'Dra. Mariana Pais', 111111111, '2001-07-10', '919210210', 'marianapais@gmail.com', 2400, 2, '$2y$10$GUWQtBnvTLqGacKkmK596.ellEnXnY97QMUYzgK9F/BWqWcW8iQjG', '../img/Med1.png', 1, 1, 2, 3, 4, 5);
+INSERT INTO Dentist (id, person_name, tax_id, birth_date, phone_number, email, salary, office, dentist_password, photo, active_dentist, schedule1_id, schedule2_id, schedule3_id, schedule4_id, schedule5_id) VALUES  (1, 'Dra. Mariana Pais', 111111111, '2001-07-10', '919210210', 'marianapais@gmail.com', 2400, 2, '$2y$10$s5KdnvHQGhZhZv7qpMyF6.rBHprfMC4Q6Kdj9l/ES31yV58PkGTkK', '../img/Med1.png', 1, 1, 2, 3, 4, 5);
 
 INSERT INTO Schedule (id, week_day, start_time, end_time) VALUES (6, 1, '09:00', '18:00');
 INSERT INTO Schedule (id, week_day, start_time, end_time) VALUES (7, 2, '08:00', '18:00');
 INSERT INTO Schedule (id, week_day, start_time, end_time) VALUES (8, 3, '09:00', '13:00');
 INSERT INTO Schedule (id, week_day, start_time, end_time) VALUES (9, 4, '09:00', '16:00');
 INSERT INTO Schedule (id, week_day, start_time, end_time) VALUES (10, 5, '12:00', '18:00');
-INSERT INTO Dentist (id, person_name, tax_id, birth_date, phone_number, email, salary, office, dentist_password, photo, active_dentist, schedule1_id, schedule2_id, schedule3_id, schedule4_id, schedule5_id) VALUES  (2, 'Dr. João Salgado', 111111112, '2001-07-10', '919211211', 'joaosalgado@gmail.com', 2300, 1, '$2y$10$6DQ4Uc0lYOUahRovfpCDE./PfJxyA0KEj4IymLzw32Unew5lsaAzm', '../img/Med2.png', 1, 6, 7, 8, 9, 10);
+INSERT INTO Dentist (id, person_name, tax_id, birth_date, phone_number, email, salary, office, dentist_password, photo, active_dentist, schedule1_id, schedule2_id, schedule3_id, schedule4_id, schedule5_id) VALUES  (2, 'Dr. João Salgado', 111111112, '2001-07-10', '919211211', 'joaosalgado@gmail.com', 2300, 1, '$2y$10$ccsKNCQn.licE4zis4YusevjOibBxqato5baZ4siF01DgiE0tunbq', '../img/Med2.png', 1, 6, 7, 8, 9, 10);
 
 INSERT INTO Schedule (id, week_day, start_time, end_time) VALUES (11, 1, '08:30', '17:30');
 INSERT INTO Schedule (id, week_day, start_time, end_time) VALUES (12, 2, '09:30', '12:30');
 INSERT INTO Schedule (id, week_day, start_time, end_time) VALUES (13, 3, '12:00', '18:00');
 INSERT INTO Schedule (id, week_day, start_time, end_time) VALUES (14, 4, '10:30', '20:30');
 INSERT INTO Schedule (id, week_day, start_time, end_time) VALUES (15, 5, '08:30', '15:30');
-INSERT INTO Dentist (id, person_name, tax_id, birth_date, phone_number, email, salary, office, dentist_password, photo, active_dentist, schedule1_id, schedule2_id, schedule3_id, schedule4_id, schedule5_id) VALUES  (3, 'Dr. Diogo Bastos', 111111113, '2001-07-10', '919212212', 'diogobastos@gmail.com', 3500, 2, '$2y$10$XG5bLCSkQGBsFwGGSrhWru9OR9Zn9IzFzdYAr9nltKX16Va/JBNky', '../img/Med3.png', 1, 11, 12, 13, 14, 15);
+INSERT INTO Dentist (id, person_name, tax_id, birth_date, phone_number, email, salary, office, dentist_password, photo, active_dentist, schedule1_id, schedule2_id, schedule3_id, schedule4_id, schedule5_id) VALUES  (3, 'Dr. Diogo Bastos', 111111113, '2001-07-10', '919212212', 'diogobastos@gmail.com', 3500, 2, '$2y$10$OfqHpw/K9xxN3pkWA4yB2uckXFhs/rx.ySTCIjtUcxGR/XRAC03Zu', '../img/Med3.png', 1, 11, 12, 13, 14, 15);
 
 INSERT INTO Schedule (id, week_day, start_time, end_time) VALUES (16, 1, '08:00', '17:00');
 INSERT INTO Schedule (id, week_day, start_time, end_time) VALUES (17, 2, '10:00', '14:00');
 INSERT INTO Schedule (id, week_day, start_time, end_time) VALUES (18, 3, '12:00', '18:00');
 INSERT INTO Schedule (id, week_day, start_time, end_time) VALUES (19, 4, '09:00', '19:00');
 INSERT INTO Schedule (id, week_day, start_time, end_time) VALUES (20, 5, '08:30', '16:30');
-INSERT INTO Dentist (id, person_name, tax_id, birth_date, phone_number, email, salary, office, dentist_password, photo, active_dentist, schedule1_id, schedule2_id, schedule3_id, schedule4_id, schedule5_id) VALUES  (4, 'Dra. Bárbara Teixeira', 111111114, '2001-07-10', '919213213', 'babampteixeira@gmail.com', 3500, 4, '$2y$10$sybJ9F1IkuqgUx2xCggESu4iGE7qjlFBlaR53zui/RGxKdDMUqDki', '../img/Med4.png', 1, 16, 17, 18, 19, 20);
+INSERT INTO Dentist (id, person_name, tax_id, birth_date, phone_number, email, salary, office, dentist_password, photo, active_dentist, schedule1_id, schedule2_id, schedule3_id, schedule4_id, schedule5_id) VALUES  (4, 'Dra. Bárbara Teixeira', 111111114, '2001-07-10', '919213213', 'babampteixeira@gmail.com', 3500, 4, '$2y$10$9F8ucbofFIrEYuRdRUCVo.LvkU1uks2ts2Q8hWv.xSxas0rL3YgXe', '../img/Med4.png', 1, 16, 17, 18, 19, 20);
 
 INSERT INTO Schedule (id, week_day, start_time, end_time) VALUES (21, 1, '09:30', '17:30');
 -- INSERT INTO Schedule (id, week_day, start_time, end_time) VALUES (22, 2, '10:30', '15:30');
 INSERT INTO Schedule (id, week_day, start_time, end_time) VALUES (23, 3, '13:00', '19:00');
 -- INSERT INTO Schedule (id, week_day, start_time, end_time) VALUES (24, 4, '09:30, '18:30);
 INSERT INTO Schedule (id, week_day, start_time, end_time) VALUES (25, 5, '09:00', '16:00');
-INSERT INTO Dentist (id, person_name, tax_id, birth_date, phone_number, email, salary, office, dentist_password, photo, active_dentist, schedule1_id, schedule2_id, schedule3_id, schedule4_id, schedule5_id) VALUES  (5, 'Dr. José Queirós', 111111115, '2001-07-10', '919214214', 'josequeiros@gmail.com', 3500, 1, '$2y$10$.CNCYCxz75YmPApuRGzqYudqGehMiIIpVgfOgc34F2PxaIAW8TJqG', '../img/Med5.png', 1, 21, 23, 25, NULL, NULL);
+INSERT INTO Dentist (id, person_name, tax_id, birth_date, phone_number, email, salary, office, dentist_password, photo, active_dentist, schedule1_id, schedule2_id, schedule3_id, schedule4_id, schedule5_id) VALUES  (5, 'Dr. José Queirós', 111111115, '2001-07-10', '919214214', 'josequeiros@gmail.com', 3500, 1, '$2y$10$MiygOhrDulbVkZE.gknLYOFnbT8OAjuBs86dxz2mv0wKATPHZzxb6', '../img/Med5.png', 1, 21, 23, 25, NULL, NULL);
 
 -- INSERT INTO Schedule (id, week_day, start_time, end_time) VALUES (26, 1, '08:00', '17:00');
 INSERT INTO Schedule (id, week_day, start_time, end_time) VALUES (27, 2, '10:00', '14:00');
 INSERT INTO Schedule (id, week_day, start_time, end_time) VALUES (28, 3, '12:00', '18:00');
 -- INSERT INTO Schedule (id, week_day, start_time, end_time) VALUES (29, 4, '09:00', '19:00');
 INSERT INTO Schedule (id, week_day, start_time, end_time) VALUES (30, 5, '08:30', '16:30');
-INSERT INTO Dentist (id, person_name, tax_id, birth_date, phone_number, email, salary, office, dentist_password, photo, active_dentist, schedule1_id, schedule2_id, schedule3_id, schedule4_id, schedule5_id) VALUES  (6, 'Dr. Carlos Videiras', 111111116, '2002-07-10', '919215215', 'carlosoliveira@gmail.com', 1500, 3, '$2y$10$.CNCYCxz75YmPApuRGzqYudqGehMiIIpVgfOgc34F2PxaIAW8TJqG', '../img/Med6.png', 0, 27, 28, 30, NULL, NULL);
+INSERT INTO Dentist (id, person_name, tax_id, birth_date, phone_number, email, salary, office, dentist_password, photo, active_dentist, schedule1_id, schedule2_id, schedule3_id, schedule4_id, schedule5_id) VALUES  (6, 'Dr. Carlos Videiras', 111111116, '2002-07-10', '919215215', 'carlosoliveira@gmail.com', 1500, 3, '$2y$10$WtT6bA0k6wix.gdcDVtkKubFuJxlDldhr38fv11zmk16r/GtTuyRi', '../img/Med6.png', 0, 27, 28, 30, NULL, NULL);
 
 
 -------------------------Assistant
-INSERT INTO Assistant (id, person_name, tax_id, birth_date, phone_number, email, salary, assistant_password, photo, active_assistant, schedule1_id, schedule2_id, schedule3_id, schedule4_id, schedule5_id) VALUES  (1, 'Ass. Rogério Alberto', 111111116, '2001-05-10', '919210250', 'rogerioalberto@gmail.com', 1400, '$2y$10$GUWQtBnvTLqGacKkmK596.ellEnXnY97QMUYzgK9F/BWqWcW8iQjG', '../img/Ass1.png', 1, 1, 2, 3, 4, 5);
-INSERT INTO Assistant (id, person_name, tax_id, birth_date, phone_number, email, salary, assistant_password, photo, active_assistant, schedule1_id, schedule2_id, schedule3_id, schedule4_id, schedule5_id) VALUES  (2, 'Ass. Rute Marlene', 111111117, '2000-06-10', '919611211', 'rutemarlene@gmail.com', 1300, '$2y$10$6DQ4Uc0lYOUahRovfpCDE./PfJxyA0KEj4IymLzw32Unew5lsaAzm', '../img/Ass2.png', 1, 1, 2, 3, 4, 5);
-INSERT INTO Assistant (id, person_name, tax_id, birth_date, phone_number, email, salary, assistant_password, photo, active_assistant, schedule1_id, schedule2_id, schedule3_id, schedule4_id, schedule5_id) VALUES  (3, 'Ass. Marta Leal', 111111118, '2001-05-10', '919210251', 'martaleal@gmail.com', 1400, '$2y$10$GUWQtBnvTLqGacKkmK596.ellEnXnY97QMUYzgK9F/BWqWcW8iQjG', '../img/Ass3.png', 1, 1, 2, 3, 4, 5);
-INSERT INTO Assistant (id, person_name, tax_id, birth_date, phone_number, email, salary, assistant_password, photo, active_assistant, schedule1_id, schedule2_id, schedule3_id, schedule4_id, schedule5_id) VALUES  (4, 'Ass. Quim Parreira', 111111119, '2000-06-10', '919611212', 'quimparreira@gmail.com', 1300, '$2y$10$6DQ4Uc0lYOUahRovfpCDE./PfJxyA0KEj4IymLzw32Unew5lsaAzm', '../img/Ass4.png', 1, 1, 2, 3, 4, 5);
+INSERT INTO Assistant (id, person_name, tax_id, birth_date, phone_number, email, salary, assistant_password, photo, active_assistant, schedule1_id, schedule2_id, schedule3_id, schedule4_id, schedule5_id) VALUES  (1, 'Ass. Rogério Alberto', 111111116, '2001-05-10', '919210250', 'rogerioalberto@gmail.com', 1400, '$2y$10$Lt6AquuOBcfxAF2cYq4dqusyVzHjy/k4SEQniMAMdAAbaAkl0sVty', '../img/Ass1.png', 1, 1, 2, 3, 4, 5);
+INSERT INTO Assistant (id, person_name, tax_id, birth_date, phone_number, email, salary, assistant_password, photo, active_assistant, schedule1_id, schedule2_id, schedule3_id, schedule4_id, schedule5_id) VALUES  (2, 'Ass. Rute Marlene', 111111117, '2000-06-10', '919611211', 'rutemarlene@gmail.com', 1300, '$2y$10$pcc7RycJsVopYX7wRAczaOUBwDSCmvaHZ/s2ufE3js9Pph9tuBzQu', '../img/Ass2.png', 1, 1, 2, 3, 4, 5);
+INSERT INTO Assistant (id, person_name, tax_id, birth_date, phone_number, email, salary, assistant_password, photo, active_assistant, schedule1_id, schedule2_id, schedule3_id, schedule4_id, schedule5_id) VALUES  (3, 'Ass. Marta Leal', 111111118, '2001-05-10', '919210251', 'martaleal@gmail.com', 1400, '$2y$10$c886Bbzu5TEnPi1ITKcTTuh.KNMIlpcOJ8kvdcRsU4E8A6VcgTm0W', '../img/Ass3.png', 1, 1, 2, 3, 4, 5);
+INSERT INTO Assistant (id, person_name, tax_id, birth_date, phone_number, email, salary, assistant_password, photo, active_assistant, schedule1_id, schedule2_id, schedule3_id, schedule4_id, schedule5_id) VALUES  (4, 'Ass. Quim Parreira', 111111119, '2000-06-10', '919611212', 'quimparreira@gmail.com', 1300, '$2y$10$ntdn3qWAgXXhPYitHy3u9OFHmJVoAoEklW7JbRfglaA2KpB9.gSH.', '../img/Ass4.png', 1, 1, 2, 3, 4, 5);
 
 
 -------------------------Brand/Machines
