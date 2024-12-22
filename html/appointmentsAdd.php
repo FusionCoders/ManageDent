@@ -93,6 +93,8 @@ include_once("../php/db_functions.php");
                             $message = urldecode($_GET['message']);
                             if ($message == 'assistant unavailable') {
                                 echo 'The assistant already has another appointment at that time.';
+                            } elseif ($message == 'assistant not working') {
+                                echo 'The assistant is not working at that time.';
                             } 
                         }
                     ?></p>

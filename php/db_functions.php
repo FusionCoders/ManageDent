@@ -898,31 +898,31 @@ function checkIfDentistWorks($dentist_id, $date_appointment, $start_time, $end_t
     return $var;
 }
 
-function verificarSeAssistenteTrabalha($assistente_id, $data_consulta, $hora_inicio, $hora_fim) {
+function checkIfAssistantWorks($assistant_id, $date_appointment, $start_time, $end_time) {
     global $db;
-    $dia_semana = date('N', strtotime($data_consulta));
-    $todos_horarios = array();
-    $horario_colunas = array('horario1_id', 'horario2_id', 'horario3_id', 'horario4_id', 'horario5_id');
+    $day_week = date('N', strtotime($date_appointment));
+    $all_schedules = array();
+    $schedule_columns = array('schedule1_id', 'schedule2_id', 'schedule3_id', 'schedule4_id', 'schedule5_id');
     for($i=1; $i<6; $i++) {
-        $coluna_horario = $horario_colunas[$i - 1];
+        $schedule_column = $schedule_columns[$i - 1];
         $stmt = $db -> prepare("SELECT * 
-                        FROM Assistente AS A
-                        JOIN Horario AS H ON A.'$coluna_horario'=H.id
+                        FROM Assistant AS A
+                        JOIN Schedule AS H ON A.'$schedule_column' = H.id
                         WHERE A.id=?");
-        $stmt -> execute(array($assistente_id));
+        $stmt -> execute(array($assistant_id));
         while($row = $stmt->fetch()) {
-            $horario = array(
-                'diaSemana' => $row['dia_semana'],
-                'horaInicio' => $row['hora_inicio'],
-                'horaFim' => $row['hora_fim']
+            $schedule = array(
+                'dayWeek' => $row['week_day'],
+                'startTime' => $row['start_time'],
+                'endTime' => $row['end_time']
             );
-            $todos_horarios[] = $horario;
+            $all_schedules[] = $schedule;
         }
     }
     $var=0;
     $aux=0;
-    foreach($todos_horarios as $horario) {
-        if($horario['diaSemana']==$dia_semana) {
+    foreach($all_schedules as $schedule) {
+        if($schedule['dayWeek']==$day_week) {
             $aux+=1;
         }
     }
@@ -930,10 +930,10 @@ function verificarSeAssistenteTrabalha($assistente_id, $data_consulta, $hora_ini
         $var=1;
         return $var;
     } elseif ($aux!=0) {
-        foreach($todos_horarios as $horario) {
-            if(($horario['diaSemana']==$dia_semana 
-                && ($horario['horaInicio']>$hora_inicio
-                || $horario['horaFim']<$hora_fim))) {
+        foreach($all_schedules as $schedule) {
+            if(($schedule['dayWeek']==$day_week 
+                && ($schedule['startTime']>$start_time
+                || $schedule['endTime']<$end_time))) {
             $var+=1;
             }
         }
@@ -1108,32 +1108,6 @@ function getAppointmentsDentist($date_appointment, $role) {
 }
 
 
-
-function getMedicoHorarioConsultas($selectedDate) {
-    global $db;
-    $medico_id = $_SESSION['id'];
-    $diaSemana = date('N', strtotime($selectedDate));
-    $stmt = $db->prepare('SELECT hora_inicio, hora_fim 
-                          FROM Horario JOIN Medico 
-                          ON (Medico.horario1_id = Horario.id 
-                          OR Medico.horario2_id = Horario.id
-                          OR Medico.horario3_id = Horario.id
-                          OR Medico.horario4_id = Horario.id
-                          OR Medico.horario5_id = Horario.id)
-                          WHERE Medico.id = ? AND Horario.dia_semana = ?');
-    $stmt->execute(array($medico_id, $diaSemana));
-
-    $horario = array();
-    while ($row = $stmt -> fetch()){
-        
-        $horario = array(
-            'hora_inicio' => $row['hora_inicio'], 
-            'hora_fim' => $row ['hora_fim']
-        );
-    }
-    return $horario;
-}
-
 function getHoursDentist() {
     global $db;
 
@@ -1219,24 +1193,6 @@ function removeAddDentist(){
 }
 
 //----------------------------------------------Paciente--------------------------------------------------------
-
-function getDadosPaciente() {
-    global $db;
-    $stmt = $db->prepare('SELECT id, email, nome FROM Paciente WHERE id = ?');
-    $stmt->execute();
-    
-    $result = array();
-    
-    while ($row = $stmt->fetch()) {
-        $paciente = array(
-            'id' => $row['id'],
-            'email' => $row['email'],
-            'nome' => $row['nome'],
-        );
-        $result[] = $paciente;
-    }
-    return $result;
-}
 
 function getDadosThisPaciente($id) {
     global $db;

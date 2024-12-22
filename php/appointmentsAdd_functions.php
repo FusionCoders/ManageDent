@@ -23,6 +23,7 @@ if (isset($_POST['add_appointment'])) {
     $var_ass=0;
     $var_pat=0;
     $var_hour_den=0;
+    $var_hour_ass=0;
     $var_mac=0;
 
     try {
@@ -30,33 +31,40 @@ if (isset($_POST['add_appointment'])) {
         $var_ass = availabilityAssistant($date_appointment, $assistant_id, $start_time, $end_time, $appointment_id);
         $var_pat = availabilityPatient($date_appointment, $patient_id,  $start_time, $end_time, $appointment_id);
         $var_hour_den = checkIfDentistWorks($dentist_id, $date_appointment, $start_time, $end_time);
+        $var_hour_ass = checkIfAssistantWorks($assistant_id, $date_appointment, $start_time, $end_time);
         
         if($start_time<$end_time) {
             if ($var_hour_den==0){
                 if ($var_den==0) {
                     if ($var_pat==0){
-                        if ($var_ass==0) {
-                            $machineToAdd=array();
-                            foreach($machines as $machine) {
-                                $var_mac = availabilityMachine($machine, $date_appointment, $start_time, $end_time);
-                                if ($var_mac!=0) {
-                                    $message = $machine;
-                                    header("Location: ../html/appointmentsAdd.php?message=".urlencode($message));
-                                    exit();
-                                } else {
-                                    $machineToAdd[] = $machine;
+                        if ($var_hour_ass==0){
+                            if ($var_ass==0) {
+                                $machineToAdd=array();
+                                foreach($machines as $machine) {
+                                    $var_mac = availabilityMachine($machine, $date_appointment, $start_time, $end_time);
+                                    if ($var_mac!=0) {
+                                        $message = $machine;
+                                        header("Location: ../html/appointmentsAdd.php?message=".urlencode($message));
+                                        exit();
+                                    } else {
+                                        $machineToAdd[] = $machine;
+                                    }
                                 }
+                                $appointmentAdded = addAppointment($date_appointment, $dentist_id, $patient_id, $assistant_id, $start_time, $end_time);
+                                foreach($machineToAdd as $machineAdd) {
+                                    addMachineAppointment($appointmentAdded, $machineAdd);
+                                }
+                                header("Location:../html/appointments.php?date_appointment=".urlencode($date_appointment));
+                                exit();
+                            } else {
+                                $message = 'assistant unavailable';
+                                header("Location: ../html/appointmentsAdd.php?message=".urlencode($message));
+                                exit();
                             }
-                            $appointmentAdded = addAppointment($date_appointment, $dentist_id, $patient_id, $assistant_id, $start_time, $end_time);
-                            foreach($machineToAdd as $machineAdd) {
-                                addMachineAppointment($appointmentAdded, $machineAdd);
-                            }
-                            header("Location:../html/appointments.php?date_appointment=".urlencode($date_appointment));
+                        } else{
+                            $message = 'assistant not working';
+                            header("Location: ../html/appointmentsAdd.php?message=".urlencode($message));
                             exit();
-                        } else {
-                            $message = 'assistant unavailable';
-                        header("Location: ../html/appointmentsAdd.php?message=".urlencode($message));
-                        exit();
                         }
                     } else{
                         $message = 'patient unavailable';
