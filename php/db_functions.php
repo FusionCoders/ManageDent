@@ -486,6 +486,31 @@ function getMachinesName($id_appointment) {
     return $name_machines;
 }
 
+function getAllMachines() {
+    global $db;
+    $stmt = $db -> prepare('SELECT Mac.reference_number as reference_number,
+                            Mac.active_machine as active_machine,
+                            Mac.machine_name as machine_name, 
+                            Mac.model as model, 
+                            M.brand_name as brand_name 
+                            FROM Machine AS Mac
+                            JOIN Brand AS M ON Mac.brand_id=M.id');
+    $stmt -> execute(array());
+
+    $all_machines = array();
+    while ($row = $stmt->fetch()) {
+        $machine = array(
+            'reference_number' => $row['reference_number'],
+            'machine_name' => $row['machine_name'],
+            'model' => $row['model'],
+            'brand_name' => $row['brand_name'],
+            'active_machine' => $row['active_machine']
+        );
+        $all_machines[] = $machine;
+    }
+    return $all_machines;
+}
+
 function getHoursAppointment($id_appointment) {
     global $db;
     $stmt = $db -> prepare('SELECT start_time, end_time
@@ -616,14 +641,15 @@ function getAllAppointments($date_appointment) {
 
 function getAllAssistants() {
     global $db;
-    $stmt = $db -> prepare('SELECT id, person_name FROM Assistant');
+    $stmt = $db -> prepare('SELECT id, person_name, active_assistant FROM Assistant');
     $stmt -> execute(array());
 
     $all_assistants = array();
     while ($row = $stmt->fetch()) {
         $assistant = array(
             'person_name' => $row['person_name'],
-            'id' => $row['id']
+            'id' => $row['id'],
+            'active_assistant' => $row['active_assistant']
         );
         $all_assistants[] = $assistant;
     }
@@ -632,14 +658,15 @@ function getAllAssistants() {
 
 function getAllDentists() {
     global $db;
-    $stmt = $db -> prepare('SELECT id, person_name FROM Dentist');
+    $stmt = $db -> prepare('SELECT id, person_name, active_dentist FROM Dentist');
     $stmt -> execute(array());
 
     $all_dentists = array();
     while ($row = $stmt->fetch()) {
         $dentist = array(
             'person_name' => $row['person_name'],
-            'id' => $row['id']
+            'id' => $row['id'],
+            'active_dentist' => $row['active_dentist']
         );
         $all_dentists[] = $dentist;
     }
@@ -675,6 +702,38 @@ function checkScheduleExistence($day_week, $start_time, $end_time) {
         $stmt -> execute(array($day_week, $start_time, $end_time));
         return $db->lastInsertId();
     };
+}
+
+function availabilityMachine($machine_id, $date_appointment, $start_time, $end_time) {
+    global $db;
+    $stmt = $db -> prepare('SELECT C.id AS appointment_id
+                            FROM Appointment AS C
+                            JOIN Machine_Appointment AS MC ON C.id=MC.appointment_id
+                            WHERE MC.machine_id=? AND C.date_appointment=?');
+    $stmt -> execute(array($machine_id, $date_appointment));
+
+    $appointments = array();
+    while($row = $stmt->fetch()) {
+        $appointment = $row['appointment_id']; 
+        $appointments[] = $appointment;
+    }
+    $var=0;
+    foreach($appointments as $appointment){
+        $hours = getHoursAppointment($appointment);
+        $start = $hours['start_time'];
+        $end = $hours['end_time'];
+        if (!(($start<$start_time && $end<=$start_time) ||
+            ($start>=$end_time && $end>$end_time))) {
+            $var+=1;
+        }
+    }
+    return $var;
+}
+
+function addMachineAppointment($appointment_id, $machine_id) {
+    global $db;
+    $stmt = $db -> prepare('INSERT INTO Machine_Appointment (appointment_id, machine_id) VALUES (?,?)');
+    $stmt -> execute(array($appointment_id, $machine_id));
 }
 
 function availabilityProfessional($date_appointment, $professional_id, $start_time, $end_time, $appointment_id){
@@ -895,6 +954,8 @@ function addAppointment($date_appointment, $dentist_id, $patient_id, $assistant_
     $stmt = $db -> prepare('INSERT INTO Appointment (date_appointment, dentist_id, 
                             patient_id, assistant_id, schedule_id) VALUES(?,?,?,?,?)');
     $stmt -> execute(array($date_appointment, $dentist_id, $patient_id, $assistant_id, $schedule_id));
+
+    return $db->lastInsertId();
 }
 
 //----------------------------------------------Máquinas----------------------------------------------

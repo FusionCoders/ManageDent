@@ -18,10 +18,10 @@ if (isset($_POST['create']) || isset($_POST['edit'])) {
         $_SESSION['emailPat'] = $_POST['email'];
     }
 
-    if (isset($_POST['criar'])){
+    if (isset($_POST['create'])){
         $message1='add';
     }else{
-        $message1 = $idPac;
+        $message1 = $idPat;
     }
     try{
 
@@ -63,7 +63,11 @@ if (isset($_POST['create']) || isset($_POST['edit'])) {
             $message = 5;
             header("Location: ../html/patientsEdit.php?messageError=".urlencode($message)."&message=" . urlencode($message1));
             exit();
-        }   else {
+        } elseif (stripos($err_msg, "CHECK") !== false && stripos($err_msg, "check_email") !== false){
+            $message = 10;
+            header("Location: ../html/patientsEdit.php?messageError=".urlencode($message)."&message=" . urlencode($message1));
+            exit();
+        } else {
             echo $err_msg;
         }
     }

@@ -35,7 +35,9 @@ include_once("../php/db_functions.php");
                     <?php 
                     $all_dentists = getAllDentists();
                     foreach ($all_dentists as $dentist) {
-                        echo '<option value="' . $dentist['id'] . '">' . $dentist['person_name'] . '</option>';
+                        if($dentist['active_dentist'] == 1) {
+                            echo '<option value="' . $dentist['id'] . '">' . $dentist['person_name'] . '</option>';
+                        }
                     }
                     ?>
                     </select>
@@ -79,7 +81,9 @@ include_once("../php/db_functions.php");
                     <?php 
                     $all_assistants = getAllAssistants();
                     foreach ($all_assistants as $assistant) {
-                        echo '<option value="' . $assistant['id'] . '">' . $assistant['person_name'] . '</option>';   
+                        if($assistant['active_assistant'] == 1) {
+                            echo '<option value="' . $assistant['id'] . '">' . $assistant['person_name'] . '</option>'; 
+                        }  
                     }
                     ?>
                     </select>
@@ -110,6 +114,34 @@ include_once("../php/db_functions.php");
                             } 
                         }
                     ?></p>
+                </div>
+
+                <div class="input-box" id="machines">
+                    <label>Machines</label>
+                    <div class="machines">
+                        <?php 
+                        $all_machines = getAllMachines();
+                        foreach ($all_machines as $machine) {
+                            if ($machine['active_machine']==1) {
+                                $reference_number = $machine['reference_number'];
+                                echo '<div class="list_mac">';
+                                echo '<input type="checkbox" class="list_item" name="machine'.$reference_number.'" value="' . $machine['reference_number']. '">';
+                                echo '<p>'.$machine['machine_name'].' '.$machine['model'].', '.$machine['brand_name'].'</p>';
+                                echo '</div>';
+                                
+                                echo '<p class="warning" id="warn_machine">';
+                                if (isset($_GET['message'])) {
+                                    $message = urldecode($_GET['message']);
+                                    if ($message ==  $reference_number) {
+                                    echo 'The machine'.$machine['machine_name'].' '.$machine['model'].', '.$machine['brand_name'] .' is unavailable at this time.';
+                                    }
+                                }
+                                echo '</p>';
+                            }
+                        }
+                        ?>
+                    </div>
+        
                 </div>
 
                 <button type="submit" class="btn" name="cancel" id="btn_cancel" formnovalidate>Return</button>

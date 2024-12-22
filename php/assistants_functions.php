@@ -146,6 +146,10 @@ if (isset($_POST['create']) || isset($_POST['edit'])) {
             $message = 9;
             header("Location: ../html/assistantsEdit.php?messageError=".urlencode($message)."&message=" . urlencode($message1));
             exit();
+        }elseif (stripos($err_msg, "CHECK") !== false && stripos($err_msg, "check_email") !== false){
+            $message = 10;
+            header("Location: ../html/assistantsEdit.php?messageError=".urlencode($message)."&message=" . urlencode($message1));
+            exit();
         }else {
             echo $err_msg;
         }

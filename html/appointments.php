@@ -108,7 +108,7 @@ include_once("../php/db_functions.php");
                                 $all_assistants = getAllAssistants();
                                 echo '<option value="' . $appointment['assistant_id'] . '">' . $professional_name . '</option>';
                                 foreach ($all_assistants as $assistant) {
-                                    if($appointment['assistant_id'] != $assistant['id']){
+                                    if($assistant['active_assistant'] == 1 && $appointment['assistant_id'] != $assistant['id']){
                                         echo '<option value="' . $assistant['id'] . '">' . $assistant['person_name'] . '</option>';
                                     }
                                 }
@@ -126,7 +126,7 @@ include_once("../php/db_functions.php");
                                 $all_dentists = getAllDentists();
                                 echo '<option value="' . $appointment['dentist_id'] . '">' . $professional_name . '</option>';
                                 foreach ($all_dentists as $dentist) {
-                                    if($appointment['dentist_id'] != $dentist['id']){
+                                    if($dentist['active_dentist'] == 1 && $appointment['dentist_id'] != $dentist['id']){
                                         echo '<option value="' . $dentist['id'] . '">' . $dentist['person_name'] . '</option>';
                                     }
                                 }
@@ -147,11 +147,29 @@ include_once("../php/db_functions.php");
                                 } 
                             }
                         echo '</p>';
+
+                        echo '<div class="input-box">';
+                        echo '<label>Machines:</label>';
+                        echo '<ul class="machines">';
+                        $name_machines = getMachinesName($id_appointment);
+                        if (empty($name_machines)) {
+                            echo '<li>';
+                            echo '<input class="list_item" type="type" name="machine" value="No machines were requested."readonly>';
+                            echo '</li>';
+                        }else{
+                            foreach ($name_machines as $name_machine) {;
+                                echo '<li>';
+                                echo '<input class="list_item" type="type" name="machine" value="' . $name_machine['machine_name'] .' '.$name_machine['model'].'"readonly>';
+                                echo '</li>';
+                            }
+                        }
+                        echo '</ul>';
+                        echo '</div>';
                         
                         if (($date_appointment==date('Y-m-d') && $start_time>=date('H:i:s')) || $date_appointment>date('Y-m-d')) {
                             echo '<button type="submit" class="btn" name="delete" id="btn_delete">Delete</button>';
                             echo '<button type="submit" class="btn" name="edit" id="btn_save">Save Changes</button>';
-                        } elseif(getReport($id_appointment)==NULL) {
+                        } elseif(getReport($id_appointment)==NULL && $_SESSION['role'] != 'assistant') {
                             //echo '<button type="submit" class="btn" name="edit_report" id="btn_edit">Edit Report</button>';
                             echo '<button type="submit" class="btn" name="add_report" id="btn_save">Add Report</button>';
                         }

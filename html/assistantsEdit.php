@@ -143,6 +143,16 @@ include_once("../html/sidebar.php");
                 <span class="icon"><ion-icon name="create-outline"></ion-icon></span>
                 <input type="email" name="email" value="<?php if ($aux==1 || isset($_GET['messageError'])){echo $_SESSION['emailAss'];}?>" required>
                 <label>Email</label>
+                <p class="warning">
+                    <?php 
+                        if (isset($_GET['messageError'])) {
+                            $message = urldecode($_GET['messageError']);
+                            if ($message == 10) {
+                                echo 'Enter a valid email!';
+                            }
+                        }
+                    ?>
+                </p>
             </div>
 
             <div class="input-box">

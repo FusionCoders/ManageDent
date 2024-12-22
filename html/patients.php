@@ -30,7 +30,7 @@ include_once("../html/sidebar.php");
             <h1>Patients</h1>
             <?php
             $message = 'add';
-            echo '<div class="add-Pac">
+            echo '<div class="add-Pat">
                 <a href="patientsEdit.php?message=' . urlencode($message) . '">
                     <button class="button" id="add" >Add</button>
                 </a>

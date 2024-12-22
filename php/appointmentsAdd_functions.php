@@ -10,10 +10,20 @@ if (isset($_POST['add_appointment'])) {
     $end_time = $_POST['end_time'];
     $appointment_id = NULL;
 
+    $all_machines = getAllMachines();
+    $machines=array();
+    foreach ($all_machines as $machine) {
+        if(isset($_POST['machine'.$machine['reference_number']])) {
+            $machine = $_POST['machine'.$machine['reference_number']];
+            $machines[]=$machine;
+        }
+    }
+
     $var_den=0;
     $var_ass=0;
     $var_pat=0;
     $var_hour_den=0;
+    $var_mac=0;
 
     try {
         $var_den = availabilityDentist($date_appointment, $dentist_id,  $start_time, $end_time, $appointment_id);
@@ -26,7 +36,21 @@ if (isset($_POST['add_appointment'])) {
                 if ($var_den==0) {
                     if ($var_pat==0){
                         if ($var_ass==0) {
-                            addAppointment($date_appointment, $dentist_id, $patient_id, $assistant_id, $start_time, $end_time);
+                            $machineToAdd=array();
+                            foreach($machines as $machine) {
+                                $var_mac = availabilityMachine($machine, $date_appointment, $start_time, $end_time);
+                                if ($var_mac!=0) {
+                                    $message = $machine;
+                                    header("Location: ../html/appointmentsAdd.php?message=".urlencode($message));
+                                    exit();
+                                } else {
+                                    $machineToAdd[] = $machine;
+                                }
+                            }
+                            $appointmentAdded = addAppointment($date_appointment, $dentist_id, $patient_id, $assistant_id, $start_time, $end_time);
+                            foreach($machineToAdd as $machineAdd) {
+                                addMachineAppointment($appointmentAdded, $machineAdd);
+                            }
                             header("Location:../html/appointments.php?date_appointment=".urlencode($date_appointment));
                             exit();
                         } else {
